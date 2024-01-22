@@ -3,9 +3,11 @@ package com.example.roam
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +22,8 @@ class ItineraryActivity : AppCompatActivity() {
 
 
         val itineraryRecyclerView = findViewById<RecyclerView>(R.id.itineraryRecyclerView)
+        val loadingAnimationView = findViewById<LottieAnimationView>(R.id.loadingAnimationView)
+
         val layoutManager = LinearLayoutManager(this)
         itineraryRecyclerView.layoutManager = layoutManager
 
@@ -33,11 +37,13 @@ class ItineraryActivity : AppCompatActivity() {
 
         val requestBody = swipedRightPlaces?.let { ItineraryRequestData(it, 2) }
         if (requestBody != null) {
+            loadingAnimationView.visibility = View.VISIBLE
             itineraryAPI.postData(requestBody).enqueue(object : Callback<ItineraryResponse> {
                 override fun onResponse(
                     call: Call<ItineraryResponse>,
                     response: Response<ItineraryResponse>
                 ) {
+                    loadingAnimationView.visibility = View.GONE
                     if (response.isSuccessful) {
                         val responseData = response.body()
                         val itineraryText = responseData?.let{buildItineraryText(it)}
@@ -57,6 +63,7 @@ class ItineraryActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<ItineraryResponse>, t: Throwable) {
                     // Handle network failure
+                    loadingAnimationView.visibility = View.GONE
                     Log.e("API Request", "Failed", t)
                 }
             })

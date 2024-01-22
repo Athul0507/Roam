@@ -60,6 +60,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.airbnb.android:lottie:6.3.0")
     implementation("com.squareup.retrofit2:retrofit:2.6.1")
     implementation("com.squareup.retrofit2:converter-gson:2.6.1")
     implementation("com.github.yuyakaido:CardStackView:v2.3.4")

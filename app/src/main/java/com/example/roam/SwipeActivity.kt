@@ -134,7 +134,7 @@ class SwipeActivity : AppCompatActivity(), CardStackListener {
                 swipedRightPlaces.add(it)}
         }
 
-        if(layoutManager.topPosition == adapter.itemCount -1){
+        if(layoutManager.topPosition == adapter.itemCount){
             val placesNames = swipedRightPlaces.joinToString(", ") { it.name }
             val intent = Intent(this, ItineraryActivity::class.java)
             intent.putExtra("swipedRightPlaces", placesNames)
