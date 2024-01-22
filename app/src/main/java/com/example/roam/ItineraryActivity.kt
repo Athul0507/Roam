@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,15 +17,19 @@ class ItineraryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_itenerary)
-        val swipedPlacesTextView = findViewById<TextView>(R.id.textView7)
 
-        // Retrieve the swipedRightPlaces list from the intent
+
+        val itineraryRecyclerView = findViewById<RecyclerView>(R.id.itineraryRecyclerView)
+        val layoutManager = LinearLayoutManager(this)
+        itineraryRecyclerView.layoutManager = layoutManager
+
         val swipedRightPlaces = intent.getSerializableExtra("swipedRightPlaces") as String?
+       /* val swipedPlacesTextView = findViewById<TextView>(R.id.textView7)
 
-        // Check if the list is not null and display the places in the TextView
+
         if (swipedRightPlaces != null) {
             swipedPlacesTextView.text = "Swiped Right Places:\n$swipedRightPlaces"
-        }
+        }*/
 
         val requestBody = swipedRightPlaces?.let { ItineraryRequestData(it, 2) }
         if (requestBody != null) {
@@ -36,8 +42,12 @@ class ItineraryActivity : AppCompatActivity() {
                         val responseData = response.body()
                         val itineraryText = responseData?.let{buildItineraryText(it)}
 
+                        if(responseData!=null){
+                            showItinerary(responseData)
+                        }
 
-                        swipedPlacesTextView.append("\n\nAPI Response:\n$itineraryText")
+
+                        //swipedPlacesTextView.append("\n\nAPI Response:\n$itineraryText")
                     } else {
                         // Handle error response
                         val errorBody = response.errorBody()?.string()
@@ -52,6 +62,12 @@ class ItineraryActivity : AppCompatActivity() {
             })
         }
     }
+
+   private fun showItinerary(itineraryResponse: ItineraryResponse){
+       val itineraryRecyclerView = findViewById<RecyclerView>(R.id.itineraryRecyclerView)
+       val adapter = ItineraryAdapter(itineraryResponse.itinerary)
+       itineraryRecyclerView.adapter = adapter
+   }
 
     private fun buildItineraryText(itinerary: ItineraryResponse): String {
         val stringBuilder = StringBuilder()
