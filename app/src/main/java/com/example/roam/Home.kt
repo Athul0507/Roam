@@ -8,15 +8,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.ncorti.slidetoact.SlideToActView
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,6 +37,9 @@ class Home : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var firebaseAuth:FirebaseAuth
+    private var location: String? = null
+    private var duration: String?=null
+    private lateinit var durationText : EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +55,14 @@ class Home : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val currentDate = Calendar.getInstance().time
+        val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+        val formattedDate = dateFormat.format(currentDate)
+        durationText = view.findViewById(R.id.durations)
+
+        val date = view.findViewById<TextView>(R.id.date)
+        date.text = formattedDate
 
         firebaseAuth = FirebaseAuth.getInstance()
         val currentUser = firebaseAuth.currentUser
@@ -68,10 +82,9 @@ class Home : Fragment() {
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 // TODO: Get info about the selected place.
-                Toast.makeText(activity, "Place: ${place.name}, ${place.id}", Toast.LENGTH_SHORT).show()
-                val intent = Intent(activity, SwipeActivity::class.java)
-                intent.putExtra("place", place.name)
-                startActivity(intent)
+                Toast.makeText(activity, "Place: ${place.name}", Toast.LENGTH_SHORT).show()
+                location = place.name
+
             }
 
             override fun onError(status: Status) {
@@ -79,6 +92,31 @@ class Home : Fragment() {
                 Log.i(TAG, "An error occurred: $status")
             }
         })
+
+
+        val slideToActView = view.findViewById<SlideToActView>(R.id.slide)
+
+        slideToActView.onSlideCompleteListener = object: SlideToActView.OnSlideCompleteListener{
+            override fun onSlideComplete(view: SlideToActView) {
+
+
+                duration = durationText.text.toString()
+
+                if(location.isNullOrEmpty() && duration.isNullOrEmpty()) {
+                    slideToActView.setCompleted(false, true)
+                    Toast.makeText(activity, "Place and duration cant be empty", Toast.LENGTH_SHORT).show()
+
+                }
+
+                else{
+                    val intent = Intent(activity, SwipeActivity::class.java)
+                    intent.putExtra("place", location)
+                    intent.putExtra("duration", duration)
+                    startActivity(intent)
+                    slideToActView.setCompleted(false, true)
+                }
+            }
+        }
 
 
         return view
@@ -104,3 +142,4 @@ class Home : Fragment() {
             }
     }
 }
+

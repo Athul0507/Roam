@@ -34,6 +34,7 @@ class SwipeActivity : AppCompatActivity(), CardStackListener {
     private val placesAPI = PlacesAPI.create()
     private val photosAPI = PhotosAPI.create()
     private lateinit var stackView : CardStackView
+    private var duration: String? = null
     private val swipedRightPlaces: MutableList<Place> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +58,7 @@ class SwipeActivity : AppCompatActivity(), CardStackListener {
         }
 
         val place = intent.getStringExtra("place")
+        duration = intent.getStringExtra("duration")
         val call = placesAPI.getPlaces("$place points of interest", "en", "AIzaSyBglq1rNe7NAt6-Mrv4FxEhO1IaNP8iMrc")
 
         call.enqueue(object : Callback<PlacesResponse> {
@@ -136,8 +138,11 @@ class SwipeActivity : AppCompatActivity(), CardStackListener {
 
         if(layoutManager.topPosition == adapter.itemCount){
             val placesNames = swipedRightPlaces.joinToString(", ") { it.name }
+
             val intent = Intent(this, ItineraryActivity::class.java)
+
             intent.putExtra("swipedRightPlaces", placesNames)
+            intent.putExtra("duration", duration)
             startActivity(intent)
             //Toast.makeText(this, "Swiped Right Places: $placesNames", Toast.LENGTH_SHORT).show()
         }

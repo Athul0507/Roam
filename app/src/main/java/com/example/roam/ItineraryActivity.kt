@@ -28,6 +28,7 @@ class ItineraryActivity : AppCompatActivity() {
         itineraryRecyclerView.layoutManager = layoutManager
 
         val swipedRightPlaces = intent.getSerializableExtra("swipedRightPlaces") as String?
+        val duration = intent.getStringExtra("duration")!!.toInt()
        /* val swipedPlacesTextView = findViewById<TextView>(R.id.textView7)
 
 
@@ -35,7 +36,7 @@ class ItineraryActivity : AppCompatActivity() {
             swipedPlacesTextView.text = "Swiped Right Places:\n$swipedRightPlaces"
         }*/
 
-        val requestBody = swipedRightPlaces?.let { ItineraryRequestData(it, 2) }
+        val requestBody = swipedRightPlaces?.let { ItineraryRequestData(it, duration) }
         if (requestBody != null) {
             loadingAnimationView.visibility = View.VISIBLE
             itineraryAPI.postData(requestBody).enqueue(object : Callback<ItineraryResponse> {
@@ -51,7 +52,6 @@ class ItineraryActivity : AppCompatActivity() {
                         if(responseData!=null){
                             showItinerary(responseData)
                         }
-
 
                         //swipedPlacesTextView.append("\n\nAPI Response:\n$itineraryText")
                     } else {
