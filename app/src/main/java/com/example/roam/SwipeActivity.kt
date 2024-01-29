@@ -10,7 +10,9 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -20,12 +22,15 @@ import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.CardStackView
 import com.yuyakaido.android.cardstackview.Direction
+import com.yuyakaido.android.cardstackview.Duration
 import com.yuyakaido.android.cardstackview.StackFrom
+import com.yuyakaido.android.cardstackview.SwipeAnimationSetting
 import com.yuyakaido.android.cardstackview.SwipeableMethod
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class SwipeActivity : AppCompatActivity(), CardStackListener {
 
@@ -78,7 +83,30 @@ class SwipeActivity : AppCompatActivity(), CardStackListener {
                 }
             }
         })
+
+        val accept = findViewById<Button>(R.id.accept)
+        accept.setOnClickListener {
+            val setting = SwipeAnimationSetting.Builder()
+                .setDirection(Direction.Right)
+                .setDuration(Duration.Normal.duration)
+                .setInterpolator(AccelerateInterpolator())
+                .build()
+            layoutManager.setSwipeAnimationSetting(setting)
+            stackView.swipe()
+        }
+
+        val reject = findViewById<Button>(R.id.reject)
+        reject.setOnClickListener {
+            val setting = SwipeAnimationSetting.Builder()
+                .setDirection(Direction.Left)
+                .setDuration(Duration.Normal.duration)
+                .setInterpolator(AccelerateInterpolator())
+                .build()
+            layoutManager.setSwipeAnimationSetting(setting)
+            stackView.swipe()
+        }
     }
+
 
     private fun fetchPhotosForPlaces(places: List<Place>) {
         places.forEach { place ->

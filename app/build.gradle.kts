@@ -67,6 +67,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("com.ncorti:slidetoact:0.11.0")
+    implementation("com.itextpdf:itext7-core:7.1.15")
     kapt("com.github.bumptech.glide:compiler:4.12.0")
 
 
