@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/qm">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500sp"
+        android:text="Qutub Minar"
+        android:textSize="30sp"
+        android:paddingLeft="20sp"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:text="The Qutub Minar is a beautiful example of the grandeur of the Mughal Empire. Standing tall amidst the vastness of the Delhi landscape qutub minar is a must see when in Delhi. Aside from being an essental monument it is also a great Instagrammable spot!."
+        android:textSize="20sp"
+        android:alpha="0.7"
+        android:paddingLeft="20sp"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

@@ -13,6 +13,7 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -84,7 +85,7 @@ class SwipeActivity : AppCompatActivity(), CardStackListener {
             }
         })
 
-        val accept = findViewById<Button>(R.id.accept)
+        val accept = findViewById<ImageButton>(R.id.accept)
         accept.setOnClickListener {
             val setting = SwipeAnimationSetting.Builder()
                 .setDirection(Direction.Right)
@@ -93,9 +94,11 @@ class SwipeActivity : AppCompatActivity(), CardStackListener {
                 .build()
             layoutManager.setSwipeAnimationSetting(setting)
             stackView.swipe()
+
+
         }
 
-        val reject = findViewById<Button>(R.id.reject)
+        val reject = findViewById<ImageButton>(R.id.reject)
         reject.setOnClickListener {
             val setting = SwipeAnimationSetting.Builder()
                 .setDirection(Direction.Left)

@@ -79,3 +79,11 @@ data class ItineraryRequestData(
     val duration: Int
     // Add other fields as needed
 )
+
+data class ExploreLocation(
+    val name: String = "",
+    val imageUrl: String = "",
+    val description: String = ""
+)
+
+

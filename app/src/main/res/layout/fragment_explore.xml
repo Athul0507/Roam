@@ -6,10 +6,13 @@
     tools:context=".Explore">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/exploreViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="EXPLORE"
-        android:gravity="center"/>
+        android:orientation="vertical"
+        />
 
 </FrameLayout>

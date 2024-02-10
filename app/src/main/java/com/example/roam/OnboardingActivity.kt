@@ -1,5 +1,7 @@
 package com.example.roam
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +24,8 @@ class OnboardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
 
+        setOnboardingCompleted()
+
         viewPager = findViewById(R.id.viewPager)
         adapter = OnboardingAdapter(layouts)
         viewPager.adapter = adapter
@@ -42,5 +46,15 @@ class OnboardingActivity : AppCompatActivity() {
 
 
 
+    }
+
+    private fun setOnboardingCompleted() {
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
+        // Using a key named "onboardingCompleted" to store and retrieve the onboarding status
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("onboardingCompleted", true)
+        editor.apply()
     }
 }

@@ -125,28 +125,22 @@ class ItineraryActivity : AppCompatActivity() {
             val pdf = PdfDocument(writer)
             val document = Document(pdf)
 
-            // Add a title to the PDF
+
             document.add(Paragraph("Itinerary"))
 
-            // Loop through each itinerary day
+
             for (itineraryDay in itineraryResponse.itinerary) {
-                // Add a title for each day
                 document.add(Paragraph("Day ${itineraryResponse.itinerary.indexOf(itineraryDay) + 1}"))
 
-                // Loop through each activity and add it to the PDF
                 for (activity in itineraryDay.activities) {
-                    // Create a custom layout for the card using Div
                     val cardLayout = Div().apply {
                         setPadding(16f)
                         setBackgroundColor(ColorConstants.LIGHT_GRAY)
 
-                        // Customize the layout as needed
-                        // Add Paragraphs, Text, etc. for each piece of information
                         add(Paragraph("Place: ${activity.place}"))
                         add(Paragraph("Time: ${activity.start} - ${activity.end}"))
                     }
 
-                    // Add the card layout to the PDF
                     document.add(cardLayout)
                 }
             }
