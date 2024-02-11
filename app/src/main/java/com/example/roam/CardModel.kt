@@ -1,6 +1,7 @@
 package com.example.roam
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 
@@ -72,7 +73,9 @@ data class ItineraryDay(
 data class ItineraryResponse(
     val success: Boolean,
     @SerializedName("itinerary")val itinerary: List<ItineraryDay>
-)
+){
+    constructor() : this(false, emptyList()) // No-argument constructor
+}
 
 data class ItineraryRequestData(
     val places: String,
@@ -87,3 +90,7 @@ data class ExploreLocation(
 )
 
 
+data class SavedTrips(
+    val name: String,
+    val itinerary: ItineraryResponse
+)

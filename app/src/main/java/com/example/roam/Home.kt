@@ -75,13 +75,11 @@ class Home : Fragment() {
                     as AutocompleteSupportFragment
 
 
-        // Specify the types of place data to return.
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
 
-        // Set up a PlaceSelectionListener to handle the response.
+
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                // TODO: Get info about the selected place.
                 Toast.makeText(activity, "Place: ${place.name}", Toast.LENGTH_SHORT).show()
                 location = place.name
 

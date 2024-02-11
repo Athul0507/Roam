@@ -68,14 +68,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
-        <Button
-            android:id="@+id/button2"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/googleSignIn"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="20dp"
-            android:text="Sign In With Google"
+            android:text="Continue With Google"
+            app:icon="@drawable/google"
+            app:iconTint="@null"
+            app:backgroundTint="@null"
+            android:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signIn" />
@@ -109,7 +113,7 @@
             android:text="Haven't signed up yet?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2" />
+            app:layout_constraintTop_toBottomOf="@+id/googleSignIn" />
 
         <TextView
             android:id="@+id/textView6"

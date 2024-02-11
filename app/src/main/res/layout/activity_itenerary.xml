@@ -43,7 +43,7 @@
         app:lottie_rawRes="@raw/loading_animation" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
+        android:id="@+id/saveItinerary"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginLeft="8dp"
@@ -64,6 +64,6 @@
         android:text="Share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button" />
+        app:layout_constraintStart_toEndOf="@+id/saveItinerary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

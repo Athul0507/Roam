@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,6 +28,8 @@ class Profile : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var nameTextView : TextView
+    private lateinit var emailTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,29 +43,41 @@ class Profile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         var view = inflater.inflate(R.layout.fragment_profile, container, false)
         firebaseAuth = FirebaseAuth.getInstance()
         var signOutButton = view.findViewById<Button>(R.id.signOut)
+        nameTextView = view.findViewById(R.id.profileName)
+        emailTextView = view.findViewById(R.id.profileEmail)
+
+
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            nameTextView.text = currentUser.displayName
+            emailTextView.text = currentUser.email
+        }
+
+
         signOutButton.setOnClickListener {
             firebaseAuth.signOut()
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
 
+        val viewPager: ViewPager2 = view.findViewById(R.id.profileViewPage)
+        val tabLayout: TabLayout = view.findViewById(R.id.tabLayout)
+
+        val adapter = ProfileViewPagerAdapter(childFragmentManager, lifecycle)
+        viewPager.adapter = adapter
+
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = "Tab ${position + 1}"
+        }.attach()
+
         return view
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Profile.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             Profile().apply {

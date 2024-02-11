@@ -13,9 +13,12 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="64dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView9"
             app:layout_constraintTop_toBottomOf="@+id/textView9">
 
@@ -56,7 +59,7 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="154dp"
+            android:layout_marginTop="132dp"
             android:text="Where To?"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/date"
@@ -65,20 +68,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:background="@drawable/text_gradient"
             app:layout_constraintBottom_toBottomOf="parent">
 
 
-           <com.ncorti.slidetoact.SlideToActView
+            <com.ncorti.slidetoact.SlideToActView
                 android:id="@+id/slide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:text="Slide for an exciting adventure"
-                app:slider_icon="@drawable/aircraft_icon"/>
+                app:slider_icon="@drawable/aircraft_icon"
+                app:text="Slide for an exciting adventure" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -87,23 +89,27 @@
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:text="Duration:"
             android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/card_view"
-            app:layout_constraintTop_toTopOf="@+id/textView9" />
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/card_view" />
 
         <EditText
             android:id="@+id/durations"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:layout_marginLeft="8dp"
-            android:background="#3C3B3B"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/text_input_background"
             android:ems="10"
-            android:hint="Duration"
+            android:hint="How many days?"
             android:inputType="number"
-            app:layout_constraintStart_toEndOf="@+id/card_view"
-            app:layout_constraintTop_toTopOf="@+id/card_view" />
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,14 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class Explore : Fragment() {
+class Explore : Fragment(), LocationAdapter.OnSaveClickListener {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -35,13 +37,34 @@ class Explore : Fragment() {
         val view = inflater.inflate(R.layout.fragment_explore, container, false)
         viewPager = view.findViewById<ViewPager2>(R.id.exploreViewPager)
         getLocationsFromFirebase { locations ->
-            adapter = LocationAdapter(locations)
+            adapter = LocationAdapter(locations, this)
             viewPager.adapter = adapter
         }
 
         return view
     }
 
+
+    override fun onSaveClicked(location: ExploreLocation) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            val db = FirebaseFirestore.getInstance()
+            val userLocationsRef = db.collection("userLocations").document(userId)
+
+
+            userLocationsRef.collection("savedLocations").add(location)
+                .addOnSuccessListener { documentReference ->
+                    Log.d("Firestore", "Location added with ID: ${documentReference.id}")
+                    Toast.makeText(requireContext(), "Location saved successfully", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Firestore", "Error adding location", e)
+                    Toast.makeText(requireContext(), "Failed to save location", Toast.LENGTH_SHORT).show()
+                }
+        } else {
+            Toast.makeText(requireContext(), "User not authenticated", Toast.LENGTH_SHORT).show()
+        }
+    }
     private fun getLocationsFromFirebase(callback: (List<ExploreLocation>) -> Unit) {
         val db = FirebaseFirestore.getInstance()
         db.collection("places")

@@ -3,17 +3,23 @@ package com.example.roam
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class LocationAdapter(private val locations: List<ExploreLocation>) : RecyclerView.Adapter<LocationAdapter.LocationViewHolder>() {
+class LocationAdapter(private val locations: List<ExploreLocation>, private val saveClickListener: OnSaveClickListener) : RecyclerView.Adapter<LocationAdapter.LocationViewHolder>() {
+
+    interface OnSaveClickListener {
+        fun onSaveClicked(location: ExploreLocation)
+    }
 
     inner class LocationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.locationImage)
         private val nameTextView: TextView = itemView.findViewById(R.id.locationName)
         private val descriptionTextView: TextView = itemView.findViewById(R.id.locationDescription)
+        private val saveButton: Button = itemView.findViewById(R.id.save)
 
         fun bind(location: ExploreLocation) {
             Glide.with(itemView)
@@ -21,6 +27,11 @@ class LocationAdapter(private val locations: List<ExploreLocation>) : RecyclerVi
                 .into(imageView)
             nameTextView.text = location.name
             descriptionTextView.text = location.description
+
+
+            saveButton.setOnClickListener {
+                saveClickListener.onSaveClicked(location)
+            }
         }
     }
 
