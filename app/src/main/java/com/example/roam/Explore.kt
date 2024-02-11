@@ -54,15 +54,14 @@ class Explore : Fragment(), LocationAdapter.OnSaveClickListener {
 
             userLocationsRef.collection("savedLocations").add(location)
                 .addOnSuccessListener { documentReference ->
-                    Log.d("Firestore", "Location added with ID: ${documentReference.id}")
-                    Toast.makeText(requireContext(), "Location saved successfully", Toast.LENGTH_SHORT).show()
+                    ToastUtils.showToast(requireContext(), "Added to bucket list", 0)
                 }
                 .addOnFailureListener { e ->
                     Log.e("Firestore", "Error adding location", e)
-                    Toast.makeText(requireContext(), "Failed to save location", Toast.LENGTH_SHORT).show()
+                    ToastUtils.showToast(requireContext(), "Failed to save location", 1)
                 }
         } else {
-            Toast.makeText(requireContext(), "User not authenticated", Toast.LENGTH_SHORT).show()
+            ToastUtils.showToast(requireContext(), "User not authenticated", 1)
         }
     }
     private fun getLocationsFromFirebase(callback: (List<ExploreLocation>) -> Unit) {

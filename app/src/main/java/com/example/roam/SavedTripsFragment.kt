@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,9 +37,12 @@ class SavedTripsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_saved_trips, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.savedTripsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val emptyTrips = view.findViewById<TextView>(R.id.emptySavedTrips)
 
         loadTripNames { trips ->
-            Toast.makeText(requireContext(), trips.toString(), Toast.LENGTH_SHORT).show()
+            if(!(trips.isEmpty())){
+                emptyTrips.visibility = View.VISIBLE
+            }
             val adapter = TripNamesAdapter(trips) { itineraryResponse ->
                 val gson = Gson()
                 val itineraryResponseString = gson.toJson(itineraryResponse)

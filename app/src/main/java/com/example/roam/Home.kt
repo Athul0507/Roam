@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
@@ -61,6 +62,18 @@ class Home : Fragment() {
         val formattedDate = dateFormat.format(currentDate)
         durationText = view.findViewById(R.id.durations)
 
+        when (AppCompatDelegate.getDefaultNightMode()) {
+            AppCompatDelegate.MODE_NIGHT_NO -> {
+                durationText.setBackgroundResource(R.drawable.text_input_background)
+            }
+            AppCompatDelegate.MODE_NIGHT_YES -> {
+                durationText.setBackgroundResource(R.drawable.text_input_background_dark)
+            }
+            else -> {
+                durationText.setBackgroundResource(R.drawable.text_input_background)
+            }
+        }
+
         val date = view.findViewById<TextView>(R.id.date)
         date.text = formattedDate
 
@@ -80,7 +93,6 @@ class Home : Fragment() {
 
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                Toast.makeText(activity, "Place: ${place.name}", Toast.LENGTH_SHORT).show()
                 location = place.name
 
             }
@@ -102,8 +114,7 @@ class Home : Fragment() {
 
                 if(location.isNullOrEmpty() && duration.isNullOrEmpty()) {
                     slideToActView.setCompleted(false, true)
-                    Toast.makeText(activity, "Place and duration cant be empty", Toast.LENGTH_SHORT).show()
-
+                    ToastUtils.showToast(requireContext(), "Place and duration cant be empty", 1)
                 }
 
                 else{

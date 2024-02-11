@@ -68,12 +68,12 @@ class Login : Fragment() {
                         startActivity(intent)
                     }
                     else{
-                        Toast.makeText(activity, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                        ToastUtils.showToast(requireContext(), "Please try again", 1)
                     }
                 }
             }
             else{
-                Toast.makeText(activity, "Empty fields are not allowed", Toast.LENGTH_SHORT).show()
+                ToastUtils.showToast(requireContext(), "Empty fields are not allowed", 1)
             }
         }
 
@@ -102,7 +102,7 @@ class Login : Fragment() {
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
-                Toast.makeText(requireContext(), "Google sign in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                ToastUtils.showToast(requireContext(), "Check credentials and try again", 1)
             }
         }
     }
@@ -113,11 +113,11 @@ class Login : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     val user = firebaseAuth.currentUser
-                    Toast.makeText(requireContext(), "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
+                    ToastUtils.showToast(requireContext(), "Signed in as ${user?.displayName}", 0)
                     startActivity(Intent(requireContext(), MainActivity::class.java))
                     requireActivity().finish()
                 } else {
-                    Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT).show()
+                    ToastUtils.showToast(requireContext(), "Authentication failed", 1)
                 }
             }
     }

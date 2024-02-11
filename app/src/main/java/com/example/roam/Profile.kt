@@ -18,11 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Profile.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class Profile : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -71,7 +67,8 @@ class Profile : Fragment() {
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = "Tab ${position + 1}"
+            if(position==0) tab.text = "Saved Trips"
+            else tab.text = "Bucket List"
         }.attach()
 
         return view

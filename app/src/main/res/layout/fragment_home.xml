@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="75dp"
+            android:fontFamily="@font/robotobold"
             android:text="TextView"
             android:textColor="@color/black"
             android:textSize="22sp"
@@ -52,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="TextView"
+            android:textColor="#131313"
             app:layout_constraintStart_toStartOf="@+id/greeting"
             app:layout_constraintTop_toBottomOf="@+id/greeting" />
 

@@ -8,6 +8,14 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <TextView
+        android:id="@+id/emptyBucketList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Your bucket list items appear here"
+        tools:layout_gravity="center_horizontal" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewBucketList"
         android:layout_width="match_parent"

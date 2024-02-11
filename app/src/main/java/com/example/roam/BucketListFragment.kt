@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -43,8 +44,12 @@ class BucketListFragment : Fragment() {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerViewBucketList)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        val emptyBucketList = view.findViewById<TextView>(R.id.emptyBucketList)
 
         getSavedLocationsFromFirebase { locations ->
+            if(!(locations.isEmpty())){
+                emptyBucketList.visibility = View.GONE
+            }
             val adapter = BucketListAdapter(locations)
             recyclerView.adapter = adapter
         }

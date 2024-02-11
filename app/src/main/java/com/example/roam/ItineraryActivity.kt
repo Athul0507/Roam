@@ -64,7 +64,6 @@ class ItineraryActivity : AppCompatActivity() {
 
             val gson = Gson()
             val itineraryResponse = gson.fromJson(itineraryResponseString, ItineraryResponse::class.java)
-
             showItinerary(itineraryResponse)
             shareButton.isEnabled = true
         }
@@ -84,20 +83,21 @@ class ItineraryActivity : AppCompatActivity() {
                         loadingAnimationView.visibility = View.GONE
                         if (response.isSuccessful) {
                             val responseData = response.body()
-                            if (responseData != null) {
+                            if (responseData != null ) {
                                 itineraryResponse = responseData
                                 showItinerary(responseData)
                                 shareButton.isEnabled = true
                             }
                         } else {
                             val errorBody = response.errorBody()?.string()
+                            ToastUtils.showToast(applicationContext, "Please try again", 1)
                             Log.e("API Response Error", errorBody ?: "Unknown error")
                         }
                     }
 
                     override fun onFailure(call: Call<ItineraryResponse>, t: Throwable) {
                         loadingAnimationView.visibility = View.GONE
-                        Log.e("API Request", "Failed", t)
+                        ToastUtils.showToast(applicationContext, "Network Error", 1)
                     }
                 })
             }
@@ -110,6 +110,12 @@ class ItineraryActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             showTripNameDialog(itineraryResponse)
         }
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        super.onBackPressed()
     }
 
     private fun showItinerary(itineraryResponse: ItineraryResponse) {
@@ -231,14 +237,14 @@ class ItineraryActivity : AppCompatActivity() {
                 .add(itineraryData)
                 .addOnSuccessListener { documentReference ->
                     Log.d("Firestore", "Itinerary added with ID: ${documentReference.id}")
-                    Toast.makeText(this, "Itinerary saved successfully", Toast.LENGTH_SHORT).show()
+                    ToastUtils.showToast(this, "Itinerary saved successfully", 0)
                 }
                 .addOnFailureListener { e ->
                     Log.e("Firestore", "Error adding itinerary", e)
-                    Toast.makeText(this, "Failed to save itinerary", Toast.LENGTH_SHORT).show()
+                    ToastUtils.showToast(this, "Failed to save itinerary", 1)
                 }
         } else {
-            Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
+            ToastUtils.showToast(this, "Please log in to save ", 1)
         }
     }
 
