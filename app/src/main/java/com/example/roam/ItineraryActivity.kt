@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -52,7 +53,7 @@ class ItineraryActivity : AppCompatActivity() {
 
         val itineraryRecyclerView = findViewById<RecyclerView>(R.id.itineraryRecyclerView)
         val loadingAnimationView = findViewById<LottieAnimationView>(R.id.loadingAnimationView)
-        val shareButton = findViewById<Button>(R.id.button3)
+        val shareButton = findViewById<ImageButton>(R.id.button3)
         val saveButton = findViewById<Button>(R.id.saveItinerary)
 
         val layoutManager = LinearLayoutManager(this)
@@ -63,7 +64,7 @@ class ItineraryActivity : AppCompatActivity() {
             val itineraryResponseString : String? = intent.getStringExtra("itineraryResponse")
 
             val gson = Gson()
-            val itineraryResponse = gson.fromJson(itineraryResponseString, ItineraryResponse::class.java)
+            itineraryResponse = gson.fromJson(itineraryResponseString, ItineraryResponse::class.java)
             showItinerary(itineraryResponse)
             shareButton.isEnabled = true
         }

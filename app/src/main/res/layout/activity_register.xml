@@ -5,7 +5,7 @@
     android:id="@+id/registe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="@drawable/temporary_home_background"
     tools:context=".RegisterActivity">
 
 
@@ -16,7 +16,7 @@
         android:layout_marginTop="150dp"
         android:hint="Display Name"
         android:padding="8dp"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,7 +27,8 @@
             android:layout_height="56dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="200dp"
-            android:layout_marginRight="20dp" />
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -35,8 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:textColorHint="@color/black"
-        app:hintTextColor="@color/black"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
@@ -50,6 +51,7 @@
             android:layout_marginRight="20dp"
             android:hint="Your email"
             android:padding="8dp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -62,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
@@ -73,7 +75,9 @@
             android:layout_height="56dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:hint="Password" />
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -81,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
@@ -93,7 +97,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:hint="Retype Password"
-            android:textColorHint="@color/black" />
+            android:inputType="textPassword"
+            android:textColor="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,7 +121,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="20dp"
-        android:background="@color/shape_color_dark"
+        android:background="@drawable/squircle_button_shape"
         android:text="Register With Google"
         android:textColor="@color/shape_color_light"
         app:backgroundTint="@null"
@@ -132,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Register"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
@@ -145,7 +150,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="16dp"
         android:text="Create your account now"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout" />
 

@@ -16,7 +16,6 @@ class OnboardingAdapter(private val layouts: List<Int>) :
     }
 
     override fun onBindViewHolder(holder: OnboardingViewHolder, position: Int) {
-        // You can customize each screen here if needed
     }
 
     override fun getItemCount(): Int = layouts.size

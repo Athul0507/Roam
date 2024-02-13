@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Roam" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/colorPrimary</item>
     </style>
 
     <style name="Theme.Roam" parent="Base.Theme.Roam" />
@@ -13,6 +13,20 @@
         <item name="windowSplashScreenAnimationDuration">1000</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.Roam</item>
 
+    </style>
+
+    <style name="roundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="squircle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">120dp</item>
+    </style>
+
+    <style name="CustomBottomNavActiveIndicatorStyle" parent="@style/Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemBackground">@drawable/custom_indicator</item>
     </style>
 
 </resources>

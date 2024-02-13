@@ -9,9 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
@@ -87,7 +90,27 @@ class Home : Fragment() {
             childFragmentManager.findFragmentById(R.id.autocomplete_fragment)
                     as AutocompleteSupportFragment
 
+        val autocompleteEditText = autocompleteFragment?.view?.findViewById<EditText>(resources.getIdentifier("places_autocomplete_search_input", "id",
+            context?.packageName ?: null
+        ))
 
+// Set custom hint and icon
+        autocompleteEditText?.hint = "Enter destination!"
+        autocompleteEditText?.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        autocompleteEditText?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        autocompleteEditText?.background = ContextCompat.getDrawable(requireContext(), R.drawable.text_input_background)
+        autocompleteEditText?.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
+
+        val cardView = view.findViewById<CardView>(R.id.card_view)
+        cardView.setBackgroundResource(R.drawable.text_input_background)
+        for (i in 0 until cardView.childCount) {
+            val childView = cardView.getChildAt(i)
+            if (childView is ImageView) {
+                childView.visibility = View.GONE
+                break
+            }
+        }
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
 
 
@@ -98,7 +121,6 @@ class Home : Fragment() {
             }
 
             override fun onError(status: Status) {
-                // TODO: Handle the error.
                 Log.i(TAG, "An error occurred: $status")
             }
         })

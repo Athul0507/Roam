@@ -12,9 +12,10 @@
         android:id="@+id/emptyBucketList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:text="Your bucket list items appear here"
-        tools:layout_gravity="center_horizontal" />
+        android:textSize="18sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewBucketList"

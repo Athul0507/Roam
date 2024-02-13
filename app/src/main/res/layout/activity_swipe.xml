@@ -5,8 +5,43 @@
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
+    android:background="@drawable/temporary_swipe_background"
     tools:context=".SwipeActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/stack_view"
+        app:layout_constraintStart_toStartOf="@+id/stack_view"
+        app:layout_constraintTop_toBottomOf="@+id/stack_view">
+
+        <ImageButton
+            android:id="@+id/reject"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/accept_button_background"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/down" />
+
+        <ImageButton
+            android:id="@+id/accept"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/accept_button_background"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/up" />
+    </LinearLayout>
 
     <com.yuyakaido.android.cardstackview.CardStackView
         android:id="@+id/stack_view"
@@ -23,37 +58,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </com.yuyakaido.android.cardstackview.CardStackView>
-
-
-    <ImageButton
-        android:id="@+id/reject"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1"
-        android:background="@drawable/accept_button_background"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/down" />
-
-    <ImageButton
-        android:id="@+id/accept"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1"
-        android:background="@drawable/accept_button_background"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/up" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_margin="4dp"
     android:orientation="vertical"
     android:padding="8dp">
 
     <TextView
         android:id="@+id/placeTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:text="Place"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/timeTextView"
         app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
 
@@ -37,8 +38,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="....................................................................."
+        android:text=":"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/timeTextView"
         app:layout_constraintStart_toEndOf="@+id/timeTextView"
         app:layout_constraintTop_toTopOf="@+id/timeTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

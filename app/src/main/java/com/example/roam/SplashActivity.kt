@@ -23,7 +23,6 @@ class SplashActivity : AppCompatActivity() {
             override fun onPreDraw(): Boolean {
                 rootView.viewTreeObserver.removeOnPreDrawListener(this)
 
-                // After the view is drawn, check isFirstTime and start the next activity
                 val isFirstTime = isFirstTime()
 
                 if (isFirstTime) {

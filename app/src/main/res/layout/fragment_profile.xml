@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1c1c1c"
     tools:context=".Profile">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +18,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:text="Name"
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,18 +30,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="email"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/profileName"
             app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
         <ImageButton
             android:id="@+id/profileImageButton"
-            android:layout_width="44dp"
-            android:layout_height="0dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginRight="32dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/profileEmail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/profileName"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/profile" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/signOut"
@@ -48,8 +53,9 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="16dp"
-            android:background="#e3e2e2"
+            android:background="@drawable/squircle_button_shape"
             android:text="Sign Out"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileEmail" />
@@ -58,6 +64,8 @@
             android:id="@+id/tabLayout"
             android:layout_width="409dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#1C1C1C"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

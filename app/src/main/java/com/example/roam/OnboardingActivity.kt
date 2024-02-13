@@ -31,7 +31,6 @@ class OnboardingActivity : AppCompatActivity() {
         viewPager.adapter = adapter
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-        // Button to go to the next page
         val btnNext = findViewById<Button>(R.id.btnNext)
         btnNext.setOnClickListener {
             if (viewPager.currentItem < adapter.itemCount - 1) {
@@ -51,8 +50,6 @@ class OnboardingActivity : AppCompatActivity() {
     private fun setOnboardingCompleted() {
         val sharedPreferences: SharedPreferences =
             getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-
-        // Using a key named "onboardingCompleted" to store and retrieve the onboarding status
         val editor = sharedPreferences.edit()
         editor.putBoolean("onboardingCompleted", true)
         editor.apply()

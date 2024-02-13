@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,7 @@ class LocationAdapter(private val locations: List<ExploreLocation>, private val 
         private val imageView: ImageView = itemView.findViewById(R.id.locationImage)
         private val nameTextView: TextView = itemView.findViewById(R.id.locationName)
         private val descriptionTextView: TextView = itemView.findViewById(R.id.locationDescription)
-        private val saveButton: Button = itemView.findViewById(R.id.save)
+        private val saveButton: ImageButton = itemView.findViewById(R.id.save)
 
         fun bind(location: ExploreLocation) {
             Glide.with(itemView)
@@ -30,6 +31,19 @@ class LocationAdapter(private val locations: List<ExploreLocation>, private val 
 
 
             saveButton.setOnClickListener {
+                val newImageResource = if (saveButton.tag == R.drawable.save) {
+                    R.drawable.saved
+                } else {
+                    R.drawable.save
+                }
+
+                // Set the new image resource
+                saveButton.setImageResource(newImageResource)
+
+                // Save the new image resource to the tag
+                saveButton.tag = newImageResource
+
+                // Call the listener method if needed
                 saveClickListener.onSaveClicked(location)
             }
         }
